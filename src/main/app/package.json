@@ -1,0 +1,16 @@
+{
+  "name": "sitecv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -a localhost -p 8000"
+  },
+  "author": "Manon GOGUERY",
+  "license": "ISC"
+}
