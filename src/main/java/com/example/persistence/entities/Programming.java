@@ -9,7 +9,7 @@ import javax.persistence.Table;
  * Created by zoe on 28/04/2017.
  */
 @Entity
-@Table(name="Programming", schema="", catalog = "siteCV")
+@Table(name="Programming", schema="", catalog = "CV")
 public class Programming {
     private String name;
     private int level;
