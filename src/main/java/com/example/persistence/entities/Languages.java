@@ -1,9 +1,6 @@
 package com.example.persistence.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by zoe on 28/04/2017.
@@ -11,26 +8,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Languages", schema="", catalog = "CV")
 public class Languages {
-    private String name;
+    private String label;
     private String level;
     private String comment;
 
     public Languages() {}
 
-    public Languages(String name, String level, String comment) {
-        this.name = name;
+    public Languages(String label, String level, String comment) {
+        this.label = label;
         this.level = level;
         this.comment = comment;
     }
 
+    @Id
     @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    @Column(name = "label")
+    public String getLabel() {
+        return label;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     @Basic

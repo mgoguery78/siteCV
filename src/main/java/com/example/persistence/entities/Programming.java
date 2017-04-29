@@ -1,9 +1,6 @@
 package com.example.persistence.entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by zoe on 28/04/2017.
@@ -23,6 +20,7 @@ public class Programming {
         this.comment = comment;
     }
 
+    @Id
     @Basic
     @Column(name = "name")
     public String getName() {
