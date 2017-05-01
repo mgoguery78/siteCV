@@ -1,5 +1,7 @@
 package com.example.controllers;
 
+import com.example.models.EducationBean;
+import com.example.models.ExperienceBean;
 import com.example.persistence.entities.*;
 import com.example.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,13 +49,33 @@ public class GetInfosController {
     }
 
     @RequestMapping(value = "/education", method = RequestMethod.GET)
-    public List<Education> getEducationInfos() {
-        return educationService.getAllEducations();
+    public List<EducationBean> getEducationInfos() {
+        List<EducationBean> educationBeanList = new ArrayList<>();
+
+        for(Education education : educationService.getAllEducations()) {
+            EducationBean educationBean = new EducationBean(education);
+
+            School school = schoolService.getSchoolById(education.getSchoolId());
+            educationBean.setSchool(school);
+            educationBean.setLocalisation(localisationService.getLocalisationById(school.getLocalisationId()));
+
+            educationBeanList.add(educationBean);
+        }
+        return educationBeanList;
     }
 
     @RequestMapping(value = "/experience", method = RequestMethod.GET)
-    public List<Experience> getExperienceInfos() {
-        return experienceService.getAllExperiences();
+    public List<ExperienceBean> getExperienceInfos() {
+        List<ExperienceBean> experienceBeanList = new ArrayList<>();
+
+        for(Experience experience : experienceService.getAllExperiences()) {
+            ExperienceBean experienceBean = new ExperienceBean(experience);
+            experienceBean.setLocalisation(localisationService.getLocalisationById(experience.getLocalisationId()));
+            experienceBean.setTaskList(taskListService.getTaskListForExperience(experience.getId()));
+            experienceBeanList.add(experienceBean);
+        }
+
+        return experienceBeanList;
     }
 
     @RequestMapping(value = "/languages", method = RequestMethod.GET)
